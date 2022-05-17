@@ -1,0 +1,69 @@
+<header class="py-3 navcolor border-bottom">
+    <div class="container-fluid d-grid gap-3 align-items-center" style="grid-template-columns: 1fr 2fr;">
+        <a href="/" class="navbar-brand text-decoration-none text-light">GadgetStore</a>
+
+        <div class="d-flex align-items-center justify-content-end">
+            <form class="w-60 me-3" >
+                <input type="search" class="form-control" placeholder="Search..." aria-label="Search" style="border-color: #E12836; border-width: 3px; ">
+            </form>
+
+            <div class="flex-shrink-0 dropdown me-3">
+                <a href="#" class="d-block link-dark text-decoration-none " id="dropdownUser2"
+                    data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="fas fa-bell" style="color: #fff;"></i>
+                </a>
+                <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser2">
+                    <li><a class="dropdown-item" href="#">offer code for zomato 88767t</a></li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+                    <li><a class="dropdown-item" href="#">offer</a></li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+                    <li><a class="dropdown-item" href="#">offer</a></li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+                    <li><a class="dropdown-item" href="#">offer</a></li>
+                </ul>
+            </div>
+
+            <span class="badge bg-danger rounded-pill" id="cart-count">{{cartCount}}</span>
+            <a class="text-reset me-3" href="/cart">
+                <i class="fas fa-shopping-cart" style="color: #fff;"></i>
+
+            </a>
+
+
+            <div class="flex-shrink-0 dropdown">
+                <a href="#" class="d-block link-dark text-decoration-none " id="dropdownUser2" data-bs-toggle="dropdown"
+                    aria-expanded="false">
+                    {{#if user}}
+                    <i class="fa-solid fa-user-check" style="color: #fff;"></i>
+                    {{else}}
+                    <i class="fa-solid fa-user" style="color: #fff;"></i>
+                    {{/if}}
+                </a>
+                <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser2">
+                    <li><a class="dropdown-item" href="/my-profile">My Profile</a></li>
+                    <li><a class="dropdown-item" href="/my-orders">My Orders</a></li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+                    {{#if user}}
+                    <li><a class="dropdown-item" href="/logout">Logout</a></li>
+                    {{else}}
+                    <li><a class="dropdown-item" href="/login">Login</a></li>
+                    {{/if}}
+                </ul>
+            </div>
+        </div>
+    </div>
+</header>
+
+<style>
+    .navcolor{
+        background-color: #100c08;
+    }
+</style>

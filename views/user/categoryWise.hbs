@@ -1,0 +1,24 @@
+<section>
+    <div class="container mt-5">
+        {{#if cat}}
+        <h4 class="text-center mb-5"><strong>{{cat}}</strong></h4>
+        {{/if}}
+        <div class="row">
+            {{#each prodata}}
+            <div class="col-md-3 mt-5">
+                <a href="/product-page/{{this._id}}" class="text-decoration-none link-dark">
+                    <div class="card mx-auto" style="width: 18rem; height:auto">
+                        <img src="/product-image/{{this._id}}/{{this.imageId}}_3.jpg" class="card-img-top" alt="..." style="height: 17rem;">
+                        <div class="card-body">
+                            <h5 class="card-title">{{this.Name}}</h5>
+                            <p class="card-text">₹{{this.Price}}</p>
+                </a>
+                <a href="#" class="btn btn-primary">Add to Cart</a>
+            </div>
+        </div>
+
+    </div>
+    {{/each}}
+    </div>
+    </div>
+</section>
