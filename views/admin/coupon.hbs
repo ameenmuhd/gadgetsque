@@ -4,8 +4,8 @@
 
         <div class="contents order-2 order-md-1">
             <div class="container">
-                    <div class="col-md-12">
-                <div class="row align-items-center justify-content-center">
+                <div class="col-md-12">
+                    <div class="row align-items-center justify-content-center">
                         <div class="col-md-6">
                             <div class="form-block" id="cat">
                                 <div class="text-center mb-5">
@@ -25,7 +25,8 @@
                                         <input type="text" class="form-control" name="Coupon">
 
                                         {{!-- <label class="pt-4">Starting Date</label> --}}
-                                        {{!-- <input type="Date" class="form-control" hidden required name="Starting" id="str"> --}}
+                                        {{!-- <input type="Date" class="form-control" hidden required name="Starting"
+                                            id="str"> --}}
                                         <label class="pt-4">Expiry Date</label>
                                         <input type="Date" class="form-control" required name="Expiry" id="txtDate">
                                         <label class="pt-4">Coupon Percentage</label>
@@ -61,14 +62,15 @@
         <tbody>
             {{#each allCoupons}}
             <tr>
-                <td >{{inc @index}}</td>
+                <td>{{inc @index}}</td>
                 <td>{{this.Coupon}}</td>
 
                 {{!-- <td>{{this.Starting}}</td> --}}
                 <td>{{this.Expiry}}</td>
                 <td>{{this.Offer}}</td>
                 <td>
-                    {{!-- <a href="/admin/edit-coupon/{{this._id}}" class="btn btn-primary"><i class="fas fa-edit"></i></a> --}}
+                    {{!-- <a href="/admin/edit-coupon/{{this._id}}" class="btn btn-primary"><i
+                            class="fas fa-edit"></i></a> --}}
                     <a class="btn btn-danger" href="/admin/delete-coupon/{{this._id}}" name="{{this.Category}}"
                         onclick="deleteCoupon(event)"><i class="fas fa-trash-alt"></i></a>
                 </td>
@@ -85,20 +87,20 @@
 <script>
     $(document).ready(function () {
         var dtToday = new Date();
-    
-    var month = dtToday.getMonth() + 1;
-    var day = dtToday.getDate();
-    var year = dtToday.getFullYear();
-    if(month < 10)
-        month = '0' + month.toString();
-    if(day < 10)
-        day = '0' + day.toString();
-    
-    var maxDate = year + '-' + month + '-' + day;
 
-    // or instead:
-    // var maxDate = dtToday.toISOString().substr(0, 10);
-    $('#txtDate').attr('min', maxDate);
+        var month = dtToday.getMonth() + 1;
+        var day = dtToday.getDate();
+        var year = dtToday.getFullYear();
+        if (month < 10)
+            month = '0' + month.toString();
+        if (day < 10)
+            day = '0' + day.toString();
+
+        var maxDate = year + '-' + month + '-' + day;
+
+        // or instead:
+        // var maxDate = dtToday.toISOString().substr(0, 10);
+        $('#txtDate').attr('min', maxDate);
     })
 </script>
 <script>

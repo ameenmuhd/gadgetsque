@@ -25,52 +25,57 @@
                     <button class="btn btn-primary" type="button">Upload new image</button>
                 </div>
             </div>
-             <hr class="mt-0 mb-2">
-        <div class="col-xl-4 mb-4">
-            <!-- Billing card 1-->
-            <div class="card h-100 border-start-xl border-start-primary">
-                <div class="card-body">
-                    <div class="small text-muted">Wallet Balance</div>
-                    <div class="h3">₹{{user.wallet}}</div>
-                   
-                    <a type="button" class="list-group-item list-group-item-action py-2 ripple" data-bs-toggle="modal"
-    data-bs-target="#myModel" id="shareBtn" data-bs-placement="top" title="Click Me!"><i
-        class="fas fa-retweet fa-fw me-2"></i><span>Invite and Earn</span></a> <!-- Modal -->
-<div class="modal fade" id="myModel" tabindex="-1" aria-labelledby="myModelLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="myModelLabel">Share Link</h5> <button type="button" class="btn-close"
-                    data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <p>Share this link via</p>
-                <div class="d-flex align-items-center icons"> <a
-                        href="https://www.facebook.com/sharer/sharer.php?u={{referalLink}}"
-                        class="fs-5 d-flex align-items-center justify-content-center">
-                        <span class="fab fa-facebook-f"></span> </a> <a href="https://twitter.com/i/flow/login"
-                        class="fs-5 d-flex align-items-center justify-content-center">
-                        <span class="fab fa-twitter"></span> </a> <a href="https://www.instagram.com/accounts/login/"
-                        class="fs-5 d-flex align-items-center justify-content-center">
-                        <span class="fab fa-instagram"></span> </a> <a
-                        href="https://api.whatsapp.com/send?text={{referalLink}}"
-                        class="fs-5 d-flex align-items-center justify-content-center">
-                        <span class="fab fa-whatsapp"></span> </a> <a
-                        href="https://telegram.me/share/url?url={{referalLink}}"
-                        class="fs-5 d-flex align-items-center justify-content-center">
-                        <span class="fab fa-telegram-plane"></span> </a> </div>
-                <p>Or copy link</p>
-                <div class="field d-flex align-items-center justify-content-between">
-                    <span class="fas fa-link text-center"></span> <input type="text" id="myInput"
-                        value="{{referalLink}}"> <button onclick="myFunction()">Copy</button>
+            <hr class="mt-0 mb-2">
+            <div class="col-xl-4 mb-4">
+                <!-- Billing card 1-->
+                <div class="card h-100 border-start-xl border-start-primary">
+                    <div class="card-body">
+                        <div class="small text-muted">Wallet Balance</div>
+                        <div class="h3">₹{{user.wallet}}</div>
+
+                        <a type="button" class="list-group-item list-group-item-action py-2 ripple"
+                            data-bs-toggle="modal" data-bs-target="#myModel" id="shareBtn" data-bs-placement="top"
+                            title="Click Me!"><i class="fas fa-retweet fa-fw me-2"></i><span>Invite and Earn</span></a>
+                        <!-- Modal -->
+                        <div class="modal fade" id="myModel" tabindex="-1" aria-labelledby="myModelLabel"
+                            aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="myModelLabel">Share Link</h5> <button type="button"
+                                            class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <p>Share this link via</p>
+                                        <div class="d-flex align-items-center icons"> <a
+                                                href="https://www.facebook.com/sharer/sharer.php?u={{referalLink}}"
+                                                class="fs-5 d-flex align-items-center justify-content-center">
+                                                <span class="fab fa-facebook-f"></span> </a> <a
+                                                href="https://twitter.com/i/flow/login"
+                                                class="fs-5 d-flex align-items-center justify-content-center">
+                                                <span class="fab fa-twitter"></span> </a> <a
+                                                href="https://www.instagram.com/accounts/login/"
+                                                class="fs-5 d-flex align-items-center justify-content-center">
+                                                <span class="fab fa-instagram"></span> </a> <a
+                                                href="https://api.whatsapp.com/send?text={{referalLink}}"
+                                                class="fs-5 d-flex align-items-center justify-content-center">
+                                                <span class="fab fa-whatsapp"></span> </a> <a
+                                                href="https://telegram.me/share/url?url={{referalLink}}"
+                                                class="fs-5 d-flex align-items-center justify-content-center">
+                                                <span class="fab fa-telegram-plane"></span> </a> </div>
+                                        <p>Or copy link</p>
+                                        <div class="field d-flex align-items-center justify-content-between">
+                                            <span class="fas fa-link text-center"></span> <input type="text"
+                                                id="myInput" value="{{referalLink}}"> <button
+                                                onclick="myFunction()">Copy</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-    </div>
-</div>
-                </div>
-            </div>
-        </div>
         </div>
 
         <div class="col-md-6">
@@ -145,23 +150,23 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', function (e) {
-		let field = document.querySelector('.field');
-		var copyText = document.getElementById("myInput");
-		let copyBtn = document.querySelector('.field button');
+        let field = document.querySelector('.field');
+        var copyText = document.getElementById("myInput");
+        let copyBtn = document.querySelector('.field button');
 
-		copyBtn.onclick = () => {
-			copyText.select();
-			copyText.setSelectionRange(0, 99999)
-			if (document.execCommand("copy")) {
-				field.classList.add('active');
-				copyBtn.innerText = 'Copied';
-				setTimeout(() => {
-					field.classList.remove('active');
-					copyBtn.innerText = 'Copy';
-				}, 3500)
-			}
-		}
-	})
+        copyBtn.onclick = () => {
+            copyText.select();
+            copyText.setSelectionRange(0, 99999)
+            if (document.execCommand("copy")) {
+                field.classList.add('active');
+                copyBtn.innerText = 'Copied';
+                setTimeout(() => {
+                    field.classList.remove('active');
+                    copyBtn.innerText = 'Copy';
+                }, 3500)
+            }
+        }
+    })
 </script>
 
 
@@ -230,7 +235,8 @@
         margin-left: 1rem;
         margin-right: 1rem;
     }
-     @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
 
 
     /* #shareBtn {

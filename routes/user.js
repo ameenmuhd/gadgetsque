@@ -1,4 +1,5 @@
 const { log } = require('debug/src/browser');
+require('dotenv').config();
 var express = require('express');
 const session = require('express-session');
 const { route } = require('express/lib/application');
@@ -14,6 +15,7 @@ const serviceSID = process.env.serviceSID;
 const authToken = process.env.authToken;
 const client = require('twilio')(accountSID, authToken)
 const paypal = require('paypal-rest-sdk');
+const { parse } = require('dotenv');
 const createReferal = require('referral-code-generator')
 
 
@@ -77,9 +79,11 @@ router.get('/', verifyBlock, async function (req, res, next) {
   await productHelper.startCategoryOffer(todayDate).then(() => {
 
   });
+  let allCoupons = await productHelper.getAllCoupons()
+  console.log(allCoupons);
   productHelper.getAllProducts().then((products) => {
     productHelper.getAllCategory().then((category) => {
-      res.render('user/view-products', { products, category, user, cartCount });
+      res.render('user/view-products', { products, category, user, cartCount,allCoupons,homePage:true});
     })
   })
 });
@@ -303,8 +307,9 @@ router.get('/cart', [verifyLogin, verifyBlock], async (req, res) => {
 router.get('/product-page/:id', verifyBlock, async (req, res) => {
   let product = await userHelpers.productView(req.params.id)
   let cartCount = await userHelpers.getCartCount(req.session?.user?._id)
+  let related = await userHelpers.relatedDetails(product.Category)
   let user = req.session.user
-  res.render('user/product-page', { product, user, cartCount })
+  res.render('user/product-page', { product, user, cartCount,related })
 })
 
 router.get('/categoryWise/:cat', async (req, res) => {
@@ -615,5 +620,12 @@ router.post("/applyWallet", async (req, res) => {
     res.json({ valnotCurrect: true });
   }
 });
+
+router.get('/quickview/:id',async (req,res)=>{
+  let product = await userHelpers.productView(req.params.id)
+  let cartCount = await userHelpers.getCartCount(req.session?.user?._id)
+  let user = req.session.user
+  res.render('user/quickView',{product,cartCount,user})
+})
 
 module.exports = router;

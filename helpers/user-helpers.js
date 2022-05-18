@@ -1,4 +1,3 @@
-require('dotenv').config()
 var db = require('../config/connection')
 var collection = require('../config/collections');
 const moment = require('moment')
@@ -603,5 +602,15 @@ module.exports = {
     })
     })
   },
+  relatedDetails: (categoryId) => {
+    return new Promise(async (resolve, reject) => {
+      let category = await db
+        .get()
+        .collection(collection.PRODUCT_COLLECTION)
+        .find({ Category: categoryId })
+        .toArray();
+      resolve(category);
+    });
+  }
 
 }

@@ -20,7 +20,7 @@
   })
 </script>
 
-<section class="breadcrumb-option">
+{{!-- <section class="breadcrumb-option">
   <div class="container">
     <div class="row">
       <div class="col-lg-12">
@@ -243,7 +243,267 @@
     </div>
   </div>
   </div>
-</section>
+</section> --}}
+
+<div class="page-content mt-5">
+  <div class="checkout">
+    <div class="container">
+      
+
+      <div class="row">
+        <div class="col-lg-8 col-md-6">
+
+          {{#if checkoutAddressMsg}}
+
+          <div class="alert alert-success d-flex align-items-center" role="alert">
+            <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:">
+              <use xlink:href="#check-circle-fill" />
+            </svg>
+            <div>
+              {{checkoutAddressMsg}}
+            </div>
+          </div>
+          {{/if}}
+
+
+          <h6 class="coupon__code text-center fs-4">BILLING DETAILS</h6>
+          <button type="button" class="btn btn-primary mb-4" data-bs-toggle="modal" data-bs-target="#exampleModal"
+            data-bs-whatever="@mdo">Add New Address</button>
+            <div id="couponMsg"></div>
+      <div class="checkout-discount">
+        <form action="#" id="couponForm">
+          <input type="text" class="form-control" style="text-transform:uppercase" required
+            id="checkout-discount-input">
+          <label for="checkout-discount-input" class="text-truncate">Have a coupon? <span>Click here to enter your
+              code</span></label>
+        </form>
+      </div><!-- End .checkout-discount -->
+      <button type="button" class="btn btn-primary mb-4" data-bs-target="#exampleModal"
+             onclick="checkCoupon()">Apply</button>
+          <div class="card-header fw-bold mt-2 mb-2">
+            SAVED ADDRESSES
+          </div>
+          <div>
+
+
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+              aria-hidden="true">
+              <form action="/add-checkout-address" method="post" id="addAddressForm2">
+                <div class="modal-dialog modal-dialog-centered">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">Add New Address</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+
+
+                      <div class="">
+                        <label class="labels">Name</label><input type="text" name="name" class="form-control"
+                          placeholder="Name" />
+                      </div>
+                      <div class="">
+                        <label class="labels">Address</label><input type="text" name="address" id="phoneNumber"
+                          class="form-control" placeholder="address" />
+                      </div>
+                      <div>
+                        <label for="address" class="form-label">Address Type</label>
+                        <select class="form-select" id="category" name="type" aria-label="Default select example"
+                          required>
+                          <option value="" selected>Choose a Type</option>
+                          <option value="Home">Home</option>
+                          <option value="Work">Work</option>
+                          <option value="Other">Other</option>
+                        </select>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-6">
+                          <label class="labels">Mobile</label><input type="text" name="mobile" id="pincode"
+                            class="form-control" placeholder="mobile" />
+                        </div>
+                        <div class="col-md-6">
+                          <label class="labels">Pincode</label><input type="text" name="pincode" class="form-control"
+                            placeholder="pincode" />
+                        </div>
+                      </div>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                      <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                  </div>
+              </form>
+            </div>
+          </div>
+        </div>
+
+        {{#each addresses}}
+
+        <div class="card mb-3">
+          <div class="form-check">
+            <div class="card-header">
+
+              <input class="form-check-input" type="radio" name="checkoutAddress"
+                onclick="selectAddress('{{this.address.addressId}}')" id="{{this.address.addressId}}"
+                value="{{this.address.addressId}}">
+              <label class="form-check-label" for="{{this.address.addressId}}">
+                {{this.address.type}}
+              </label>
+            </div>
+            <div class="card-body">
+              <h5 class="card-title">{{this.address.name}}
+                -
+                {{this.address.mobile}}</h5>
+              <p class="card-text">{{this.address.address}}</p>
+              <p class="card-text">{{this.address.pincode}}</p>
+              <p class="card-text">{{this.address.state}}</p>
+            </div>
+          </div>
+        </div>
+
+        {{/each}}
+      </div>
+
+
+      <aside class="col-lg-3">
+        {{#if user.wallet}}
+        <div class="col-sm-12">
+          <div class="card">
+            <div class="card-body1">
+              <div class="card-body floart-end">
+                <div class="text-center">
+                  <span>Balance = ₹{{user.wallet}} </span>
+                </div>
+              </div>
+              <input type="text" id="Totalpro" name="Totalpro" value="{{total}}" hidden>
+              <div class="form-input form text-center">
+                <input type="text" placeholder="₹ Enter the amount" id="wallet" name="walletAmount"
+                  style="width: 50%; height: 36px; padding-right: 1px;" />
+              </div>
+              <div class="button text-center p-2">
+                <a id="couponBtn" onclick="applyWallet()" class="btn"
+                  style="width: 113px; height: 34px;padding: 6px; ">apply</a>
+              </div>
+              <div class="alert alert-danger" style="display: none;" id="valueNotCorrect" role="alert">
+                Enter the Correct Amount
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="text-center p-3">
+          <p style="color: red; font-size: 12px; font-family: system-ui;">You can Choose only a Coupon or Wallet at a
+            Time</p>
+        </div>
+        {{/if}}
+        <div class="summary">
+          <h3 class="summary-title">Your Order</h3><!-- End .summary-title -->
+
+          <table class="table table-summary">
+            <thead>
+              <tr>
+                <th>Product</th>
+                <th>Total</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              {{#each products}}
+              <tr>
+                <td><a href="#">{{this.product.Name}}</a></td>
+                <td>${{this.product.Price}}</td>
+              </tr>
+              {{/each}}
+              <tr class="summary-subtotal">
+                <td>Subtotal:</td>
+                <td>{{total}}</td>
+              </tr><!-- End .summary-subtotal -->
+              <tr>
+                <td>Shipping:</td>
+                <td>Free shipping</td>
+              </tr>
+              <tr>
+                <td>Coupon Discount:</td>
+                <td><span id="couponDiscount"></span></td>
+              </tr>
+              <tr>
+                <td>Wallet Discount:</td>
+                <td><span id="discount"></span></td>
+              </tr>
+              <tr class="summary-total">
+                <td>Total:</td>
+                <td id="totalPrice">{{total}}</td>
+              </tr><!-- End .summary-total -->
+            </tbody>
+          </table><!-- End .table table-summary -->
+
+          <div class="accordion-summary" id="accordion-payment">
+            <div class="card">
+              <div class="card-header" id="heading-1">
+                <h2 class="card-title">
+                  <a role="button" data-toggle="collapse" href="#collapse-1" aria-expanded="true"
+                    aria-controls="collapse-1" name="paymentOption" id="razorpay" value="razorpay"
+              onclick="selectPayment('razorpay')">
+                    Razorpay
+                  </a>
+                </h2>
+              </div><!-- End .card-header -->
+              <div id="collapse-1" class="collapse show" aria-labelledby="heading-1" data-parent="#accordion-payment">
+                <div class="card-body">
+                  Make your payment directly into our bank account. Please use your Order ID as the payment reference.
+                  Your order will not be shipped until the funds have cleared in our account.
+                </div><!-- End .card-body -->
+              </div><!-- End .collapse -->
+            </div><!-- End .card -->
+
+            <div class="card">
+              <div class="card-header" id="heading-3">
+                <h2 class="card-title">
+                  <a class="collapsed" role="button" data-toggle="collapse" href="#collapse-3" aria-expanded="false"
+                    aria-controls="collapse-3" name="paymentOption" id="COD" value="COD"
+              onclick="selectPayment('COD')">
+                    Cash on delivery
+                  </a>
+                </h2>
+              </div><!-- End .card-header -->
+              <div id="collapse-3" class="collapse" aria-labelledby="heading-3" data-parent="#accordion-payment">
+                <div class="card-body">Quisque volutpat mattis eros. Lorem ipsum dolor sit amet, consectetuer adipiscing
+                  elit. Donec odio. Quisque volutpat mattis eros.
+                </div><!-- End .card-body -->
+              </div><!-- End .collapse -->
+            </div><!-- End .card -->
+
+            <div class="card">
+              <div class="card-header" id="heading-4">
+                <h2 class="card-title">
+                  <a class="collapsed" role="button" data-toggle="collapse" href="#collapse-4" aria-expanded="false"
+                    aria-controls="collapse-4" name="paymentOption" id="paypal" value="paypal"
+              onclick="selectPayment('paypal')" >
+                    PayPal <small class="float-right paypal-link">What is PayPal?</small>
+                  </a>
+                </h2>
+              </div><!-- End .card-header -->
+              <div id="collapse-4" class="collapse" aria-labelledby="heading-4" data-parent="#accordion-payment">
+                <div class="card-body">
+                  Nullam malesuada erat ut turpis. Suspendisse urna nibh, viverra non, semper suscipit, posuere a, pede.
+                  Donec nec justo eget felis facilisis fermentum.
+                </div><!-- End .card-body -->
+              </div><!-- End .collapse -->
+            </div><!-- End .card -->
+
+          <button type="submit" class="btn btn-outline-primary-2 btn-order btn-block" onclick="placeOrder()">
+            <span class="btn-text">Place Order</span>
+            <span class="btn-hover-text">Proceed to Checkout</span>
+          </button>
+          <input type="text" id="userName" value="{{user.Name}}" disabled hidden>
+          <input type="text" id="userPhone" value="{{user.Mobile}}" disabled hidden>
+          <input type="text" id="userEmail" value="{{user.Emailaddress}}" disabled hidden>
+        </div><!-- End .summary -->
+      </aside><!-- End .col-lg-3 -->
+    </div><!-- End .row -->
+  </div><!-- End .container -->
+</div><!-- End .checkout -->
+</div><!-- End .page-content -->
+</main><!-- End .main -->
 
 
 
@@ -255,7 +515,7 @@
 
 
   function checkCoupon() {
-    code = document.getElementById('couponCode').value
+    code = document.getElementById('checkout-discount-input').value
     code = code.toUpperCase()
     $.ajax({
       url: "/check-coupon",
@@ -335,12 +595,12 @@
               .then((value) => {
                 location.href = '/my-orders'
               })
-          }else if (response.paypal) {
+          } else if (response.paypal) {
             location.href = response.url
-          }else{
+          } else {
             console.log('called else')
             razorpayPayment(response)
-          } 
+          }
         }
       })
     }
@@ -409,7 +669,7 @@
   function applyWallet() {
     let walletval = document.getElementById('wallet').value
     let ttlpro = document.getElementById('Totalpro').value
-    console.log(ttlpro,walletval)
+    console.log(ttlpro, walletval)
     $.ajax({
       url: '/applyWallet',
       data: {

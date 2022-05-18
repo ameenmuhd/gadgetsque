@@ -571,6 +571,7 @@ module.exports = {
       // let starting = await moment(data.Starting).format('YYYY-MM-DD')
       let dataobj = {
         Coupon: data.Coupon,
+        couponCategory: data.couponCategory,
         Offer: parseInt(data.Offer),
         // Starting: starting,
         Expiry: expiry,
