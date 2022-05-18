@@ -5,7 +5,7 @@ const state = {
 
 
 module.exports.connect = (done)=>{
-    const url = 'mongodb+srv://ameenmuhd:casuals@cluster0.n4uct.mongodb.net/shopping?retryWrites=true&w=majority'
+    const url = process.env.mongoUrl
     const dbname = 'shopping'
 
     mongoClient.connect(url,(err,data)=>{
