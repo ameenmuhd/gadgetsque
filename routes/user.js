@@ -344,9 +344,11 @@ router.get('/checkout', verifyLogin, async (req, res) => {
   let total = await userHelpers.getTotalAmount(req.session.user._id)
   let addresses = await userHelpers.getAddress(req.session?.user._id);
   let products = await userHelpers.getCartProducts(req.session?.user?._id)
-
-
+  if(!total == 0){
   res.render('user/place-order', { total, user: req.session.user, addresses, products })
+  }else{
+    res.redirect('/');
+  }
 })
 
 
