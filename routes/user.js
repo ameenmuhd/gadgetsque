@@ -344,8 +344,9 @@ router.get('/checkout', verifyLogin, async (req, res) => {
   let total = await userHelpers.getTotalAmount(req.session.user._id)
   let addresses = await userHelpers.getAddress(req.session?.user._id);
   let products = await userHelpers.getCartProducts(req.session?.user?._id)
+  let user = await userHelpers.getOneUser(req.session.user._id)
   if(!total == 0){
-  res.render('user/place-order', { total, user: req.session.user, addresses, products })
+  res.render('user/place-order', { total, user,addresses, products })
   }else{
     res.redirect('/');
   }
@@ -614,9 +615,11 @@ router.post("/applyWallet", async (req, res) => {
   console.log(userDetails.wallet, walletAmount, ttl, user);
   if (userDetails.wallet >= walletAmount) {
     let total = ttl - walletAmount;
-    userHelpers.applyWallet(walletAmount, user).then(() => {
+    userHelpers.applyWallet(walletAmount, user).then(async (response) => {
+    let userDetails = await productHelper.getUserDetails(user);
+    walletBalance = userDetails.wallet
       req.session.walletTotal = total;
-      res.json({ walletSuccess: true, total, walletAmount });
+      res.json({ walletSuccess: true, total, walletAmount,walletBalance });
     });
   } else {
     res.json({ valnotCurrect: true });

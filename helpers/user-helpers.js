@@ -4,7 +4,9 @@ const moment = require('moment')
 const bcrypt = require('bcrypt');
 const async = require('hbs/lib/async');
 var objectId = require('mongodb').ObjectId
-const Razorpay = require('razorpay')
+const Razorpay = require('razorpay');
+const { resolve } = require('path');
+const { reject } = require('lodash');
 var instance = new Razorpay({
     key_id: process.env.key_id,
     key_secret: process.env.key_secret,
@@ -611,6 +613,14 @@ module.exports = {
         .toArray();
       resolve(category);
     });
+  },
+  getOneUser: (id)=>{
+      return new Promise(async (resolve,reject)=>{
+          let user = await
+           db.get().collection(collection.USER_COLLECTION)
+           .findOne({_id: objectId(id)})
+           resolve(user)
+      })
   }
 
 }
