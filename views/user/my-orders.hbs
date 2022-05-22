@@ -33,7 +33,17 @@
                   <td></td>
                   <td>{{this._id}}</td>
                   <td>{{this.deliveryDetails.address}}</td>
-                  <td><span class="badge badge-success">{{this.status}}</span></td>
+                  <td>
+                    {{#if this.cancelled}}
+                    <span class="badge badge-danger">{{this.status}}</span>
+                    {{else}}
+                    {{#if this.delivered}}
+                    <span class="badge badge-success">{{this.status}}</span>
+                    {{else}}
+                    <span class="badge badge-primary">{{this.status}}</span>
+                    {{/if}}
+                    {{/if}}
+                  </td>
                   <td>{{this.totalAmount}}</td>
                   <td>{{this.paymentMethod}}</td>
                   <td>

@@ -271,6 +271,12 @@ module.exports = {
     placeOrder: (order, products, total, Method, user, code) => {
         return new Promise((res, rej) => {
             let status = Method === 'COD' ? 'placed' : 'Cancelled'
+            var cancelled = false;
+            if(status == 'Cancelled'){
+                var cancelled = true;
+            }else if(status == 'placed'){
+                var cancelled = false;
+            }
             console.log(order);
             products[0].totalAmount = total
             let dateIso = new Date()
@@ -292,7 +298,8 @@ module.exports = {
                 DateISO: dateIso,
                 Date: date,
                 Time: time,
-                Coupon: code
+                Coupon: code,
+                cancelled: cancelled
             }
             let usersId = user._id
             if (code != 'undefined') {
@@ -540,7 +547,8 @@ module.exports = {
             db.get().collection(collection.ORDER_COLLECTION).updateOne({ _id: objectId(orderId) },
                 {
                     $set: {
-                        status: 'placed'
+                        status: 'placed',
+                        cancelled: false
                     }
                 }
             ).then(() => {
