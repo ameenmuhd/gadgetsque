@@ -91,6 +91,12 @@
 
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script>
+  $('#discount').keyup(function(){
+  if ($(this).val() > 90){
+    alert("No numbers above 90");
+    $(this).val('90');
+  }
+});
 
   function deleteOffer(offerId) {
     console.log('called')

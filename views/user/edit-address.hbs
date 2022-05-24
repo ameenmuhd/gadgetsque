@@ -18,7 +18,7 @@
               {{#each address}}
             <div class="col-12">
               <label for="username" class="form-label">Name</label>
-              <input type="text" value="{{this.address.name}}" class="form-control" id="Name" name="name" placeholder="Username" required>
+              <input type="text" value="{{this.address.name}}" class="form-control" id="Name" name="name" placeholder="Username" onkeypress='return ((event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122) || (event.charCode == 32))' required>
             </div>
 
             <div class="col-12">
@@ -38,13 +38,13 @@
 
             <div class="col-12">
               <label class="form-label">Mobile</label>
-              <input type="number" class="form-control" id="address" value="{{this.address.mobile}}"
+              <input type="tele" maxlength="10" onkeypress='validate(event)' class="form-control" id="address" value="{{this.address.mobile}}"
                 name="mobile" placeholder="" required>
             </div>
 
             <div class="col-md-3">
               <label class="form-label">Pincode</label>
-              <input type="text" class="form-control" name="pincode" value="{{this.address.pincode}}" placeholder="" required>
+              <input type="tele" class="form-control"  onkeypress='validate(event)' maxlength="6" name="pincode" value="{{this.address.pincode}}" placeholder="" required>
               <input type="text" class="form-control" name="userId" value="{{this._id}}" placeholder="" hidden>
               <input type="text" class="form-control" name="addressId" value="{{this.address.addressId}}" placeholder="" hidden>
             {{/each}}
@@ -66,3 +66,23 @@
     </div>
   </main>
 </div>
+
+<script>
+  function validate(evt) {
+  var theEvent = evt || window.event;
+
+  // Handle paste
+  if (theEvent.type === 'paste') {
+      key = event.clipboardData.getData('text/plain');
+  } else {
+  // Handle key press
+      var key = theEvent.keyCode || theEvent.which;
+      key = String.fromCharCode(key);
+  }
+  var regex = /[0-9]|\./;
+  if( !regex.test(key) ) {
+    theEvent.returnValue = false;
+    if(theEvent.preventDefault) theEvent.preventDefault();
+  }
+}
+</script>

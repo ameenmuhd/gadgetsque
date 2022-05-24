@@ -31,7 +31,7 @@
                                         <input type="Date" class="form-control" required name="Expiry" id="txtDate">
                                         <label class="pt-4">Coupon Percentage</label>
                                         <input type="text" class="form-control" required min="1" name="Offer" max="95"
-                                            onkeypress="return isNumber(event)">
+                                            onkeypress="return isNumber(event)" id="numberbox">
                                     </div>
                                     <input type="submit" value="Add" id="prosub" class="btn btn-block btn-primary">
 
@@ -85,6 +85,13 @@
 
 
 <script>
+    $('#numberbox').keyup(function(){
+  if ($(this).val() > 90){
+    alert("No numbers above 90");
+    $(this).val('90');
+  }
+});
+
     $(document).ready(function () {
         var dtToday = new Date();
 

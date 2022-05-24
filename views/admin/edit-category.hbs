@@ -6,12 +6,12 @@
                 <form action="/admin/edit-category/{{category._id}}" method="post" enctype="multipart/form-data">
                     <div class="mb-3">
                         <label for="" class="form-label">Category Name</label>
-                        <input type="text" class="form-control" name="Category" value="{{category.Category}}">
+                        <input type="text" class="form-control" name="Category" value="{{category.Category}}" onkeypress='return ((event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122) || (event.charCode == 32))' required>
                     </div>
                     <div class="mb-3">
                         <label for="" class="form-label">Image</label>
                         <img src="/category-image/{{category._id}}.jpg" alt="" style="width: 100px; height:auto" id="imgView">
-                        <input type="file" class="form-control" name="Image" onchange="viewImage(event)" >
+                        <input type="file" class="form-control" name="Image" onchange="viewImage(event)" required>
                     </div>
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </form>
@@ -26,3 +26,4 @@
         document.getElementById('imgView').src=URL.createObjectURL(event.target.files[0])
     }
 </script>
+

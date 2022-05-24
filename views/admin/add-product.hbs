@@ -19,11 +19,11 @@
                     </div>
                     <div class="mb-3">
                         <label for="" class="form-label">₹Original Price</label>
-                        <input type="text" class="form-control" name="originalPrice">
+                        <input type="text" class="form-control" name="originalPrice" onkeypress='validate(event)'>
                     </div>
                     <div class="mb-3">
                         <label for="" class="form-label">₹Selling Price</label>
-                        <input type="text" class="form-control" name="Price">
+                        <input type="text" class="form-control" name="Price" onkeypress='validate(event)'>
                     </div>
                     <div class="mb-3">
                         <label for="" class="form-label">Description</label>
@@ -78,6 +78,26 @@
         </div>
     </div>
 </section>
+
+<script>
+  function validate(evt) {
+  var theEvent = evt || window.event;
+
+  // Handle paste
+  if (theEvent.type === 'paste') {
+      key = event.clipboardData.getData('text/plain');
+  } else {
+  // Handle key press
+      var key = theEvent.keyCode || theEvent.which;
+      key = String.fromCharCode(key);
+  }
+  var regex = /[0-9]|\./;
+  if( !regex.test(key) ) {
+    theEvent.returnValue = false;
+    if(theEvent.preventDefault) theEvent.preventDefault();
+  }
+}
+</script>
 
 
 

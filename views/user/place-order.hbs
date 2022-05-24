@@ -76,7 +76,7 @@
 
                       <div class="">
                         <label class="labels">Name</label><input type="text" name="name" class="form-control"
-                          placeholder="Name" />
+                          placeholder="Name" onkeypress='return ((event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122) || (event.charCode == 32))' />
                       </div>
                       <div class="">
                         <label class="labels">Address</label><input type="text" name="address" id="phoneNumber"
@@ -94,12 +94,12 @@
                       </div>
                       <div class="row">
                         <div class="col-md-6">
-                          <label class="labels">Mobile</label><input type="text" name="mobile" id="pincode"
-                            class="form-control" placeholder="mobile" />
+                          <label class="labels">Mobile</label><input type="tele" name="mobile" id="pincode"
+                            class="form-control" placeholder="mobile" maxlength="10" onkeypress='validate(event)' />
                         </div>
                         <div class="col-md-6">
-                          <label class="labels">Pincode</label><input type="text" name="pincode" class="form-control"
-                            placeholder="pincode" />
+                          <label class="labels">Pincode</label><input type="tele" name="pincode" class="form-control"
+                            placeholder="pincode" onkeypress='validate(event)' maxlength="6" />
                         </div>
                       </div>
                     </div>
@@ -472,4 +472,23 @@
 
   }
 
+</script>
+<script>
+  function validate(evt) {
+  var theEvent = evt || window.event;
+
+  // Handle paste
+  if (theEvent.type === 'paste') {
+      key = event.clipboardData.getData('text/plain');
+  } else {
+  // Handle key press
+      var key = theEvent.keyCode || theEvent.which;
+      key = String.fromCharCode(key);
+  }
+  var regex = /[0-9]|\./;
+  if( !regex.test(key) ) {
+    theEvent.returnValue = false;
+    if(theEvent.preventDefault) theEvent.preventDefault();
+  }
+}
 </script>
