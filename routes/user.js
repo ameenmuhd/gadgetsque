@@ -398,8 +398,8 @@ router.get('/place-order', async (req, res) => {
           "payment_method": "paypal"
         },
         "redirect_urls": {
-          "return_url": "http://gadgetsque.xyz/success",
-          "cancel_url": "http://gadgetsque.xyz/cancel"
+          "return_url": "https://gadgetsque.xyz/success",
+          "cancel_url": "https://gadgetsque.xyz/cancel"
         },
         "transactions": [{
           "item_list": {
