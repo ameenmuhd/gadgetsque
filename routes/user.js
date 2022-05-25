@@ -398,8 +398,8 @@ router.get('/place-order', async (req, res) => {
           "payment_method": "paypal"
         },
         "redirect_urls": {
-          "return_url": "http://localhost:3000/success",
-          "cancel_url": "http://localhost:3000/cancel"
+          "return_url": "http://gadgetsque.xyz/success",
+          "cancel_url": "http://gadgetsque.xyz/cancel"
         },
         "transactions": [{
           "item_list": {
@@ -496,7 +496,7 @@ router.get('/my-profile', verifyLogin, async (req, res) => {
   let user = await productHelper.getUserDetails(req.session.user._id)
   let cartCount = await userHelpers.getCartCount(req.session?.user?._id)
   let refer = user.refer;
-  let referalLink = "localhost:3000/signup?refer=" + refer;
+  let referalLink = "gadgetsque.xyz/signup?refer=" + refer;
   res.render('user/my-profile', { user, errPassMsg, cartCount, profileMsg, referalLink })
   errPassMsg = null;
   profileMsg = null;
